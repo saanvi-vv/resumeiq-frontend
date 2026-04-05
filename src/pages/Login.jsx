@@ -49,6 +49,7 @@ export default function Login() {
             Upload your resume. Paste a job description.<br />Get an ATS score, missing keywords,<br />and expert feedback in seconds.
           </p>
         </div>
+      </div>
 
       {/* Right — Form */}
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px' }}>

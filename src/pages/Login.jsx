@@ -49,15 +49,6 @@ export default function Login() {
             Upload your resume. Paste a job description.<br />Get an ATS score, missing keywords,<br />and expert feedback in seconds.
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '32px' }}>
-          {[['98%', 'Accuracy'], ['2s', 'Analysis time'], ['Free', 'To use']].map(([val, label]) => (
-            <div key={label}>
-              <div style={{ fontSize: '24px', fontWeight: '700', color: 'white', fontFamily: 'DM Serif Display, serif' }}>{val}</div>
-              <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '1px' }}>{label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* Right — Form */}
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px' }}>

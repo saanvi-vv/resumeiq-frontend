@@ -109,11 +109,6 @@ export default function Register() {
               fontSize: '15px', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer'
             }}
           >
-            {loading ? (
-              <span>Creating account... (may take ~30s on first load)</span>
-            ) : (
-              'Create Account →'
-            )}
           </button>
         </form>
 

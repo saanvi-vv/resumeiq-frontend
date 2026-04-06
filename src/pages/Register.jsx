@@ -102,13 +102,9 @@ export default function Register() {
           <button
             type="submit"
             disabled={loading}
-            style={{
-              width: '100%', padding: '13px',
-              backgroundColor: loading ? '#4c1d95' : 'var(--accent)',
-              color: 'white', border: 'none', borderRadius: '10px',
-              fontSize: '15px', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer'
-            }}
+            style={{ width: '100%', padding: '13px', backgroundColor: loading ? '#e8a090' : 'var(--accent)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '15px', fontWeight: '600', cursor: 'pointer', marginTop: '8px' }}
           >
+            {loading ? 'Creating account...' : 'Create Account →'}
           </button>
         </form>
 

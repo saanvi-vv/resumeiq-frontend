@@ -7,6 +7,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [registeredEmail, setRegisteredEmail] = useState('')
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -15,9 +16,15 @@ export default function Register() {
     setError('')
     try {
       await registerUser(form)
+      setRegisteredEmail(form.email)
       setSuccess(true)
     } catch (err) {
-      setError(err.response?.data?.detail || 'Registration failed')
+      const detail = err.response?.data?.detail
+      if (Array.isArray(detail)) {
+        setError('Please enter a valid email address')
+      } else {
+        setError(detail || 'Registration failed. Please try again.')
+      }
     } finally {
       setLoading(false)
     }
@@ -26,23 +33,22 @@ export default function Register() {
   if (success) {
     return (
       <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px' }}>
-        <div style={{ textAlign: 'center', maxWidth: '440px' }}>
-          <div style={{ width: '80px', height: '80px', backgroundColor: 'var(--accent-light)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', fontSize: '36px' }}>
-            📧
+        <div style={{ backgroundColor: 'white', border: '1px solid var(--border)', borderRadius: '20px', padding: '60px 48px', maxWidth: '440px', width: '100%', textAlign: 'center', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
+          <div style={{ width: '80px', height: '80px', backgroundColor: '#f0fdf4', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', fontSize: '36px' }}>
+            🎉
           </div>
-          <h2 style={{ fontSize: '32px', fontFamily: 'DM Serif Display, serif', color: 'var(--text)', marginBottom: '12px' }}>
-            Check your inbox
+          <h2 style={{ fontSize: '28px', fontFamily: 'DM Serif Display, serif', color: 'var(--text)', marginBottom: '12px' }}>
+            Account Created!
           </h2>
-          <p style={{ color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '8px' }}>
-            We sent a verification link to
+          <p style={{ color: 'var(--text-muted)', fontSize: '15px', marginBottom: '8px', lineHeight: '1.6' }}>
+            Welcome to ResumeIQ. Your account has been created successfully.
           </p>
-          <p style={{ color: 'var(--accent)', fontWeight: '600', marginBottom: '24px' }}>{form.email}</p>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', marginBottom: '32px' }}>
-            Click the link to activate your account. Check your spam folder if you don't see it within a minute.
+          <p style={{ color: 'var(--accent)', fontWeight: '600', fontSize: '14px', marginBottom: '32px' }}>
+            {registeredEmail}
           </p>
           <button
             onClick={() => navigate('/login')}
-            style={{ padding: '12px 32px', backgroundColor: 'var(--navy)', color: 'white', border: 'none', borderRadius: '8px', fontSize: '15px', fontWeight: '600', cursor: 'pointer' }}
+            style={{ width: '100%', padding: '13px', backgroundColor: 'var(--accent)', color: 'white', border: 'none', borderRadius: '10px', fontSize: '15px', fontWeight: '600', cursor: 'pointer' }}
           >
             Go to Login →
           </button>
@@ -77,7 +83,7 @@ export default function Register() {
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {[
-            { label: 'Full Name', key: 'name', type: 'text', placeholder: 'Saanvi Vijayvergia' },
+            { label: 'Full Name', key: 'name', type: 'text', placeholder: 'Your name' },
             { label: 'Email Address', key: 'email', type: 'email', placeholder: 'you@gmail.com' },
             { label: 'Password', key: 'password', type: 'password', placeholder: 'Min 8 characters' },
           ].map(({ label, key, type, placeholder }) => (
